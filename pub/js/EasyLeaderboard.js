@@ -26,7 +26,7 @@
             newLeaderboard.setAttribute("id", id);
             
             // Title
-            const titleContainer = document.createElement("h1");
+            const titleContainer = document.createElement("h2");
             const titleText = document.createTextNode(title);
             titleContainer.appendChild(titleText);
             newLeaderboard.appendChild(titleContainer);
@@ -34,6 +34,12 @@
             // Category Bar
             const categoryContainer = document.createElement('div');
             const categoryButton = document.createElement('BUTTON');
+            var categoryButtonDefaultText = "Category";
+            if (category.length != 0)
+            {
+                categoryButtonDefaultText = document.createTextNode(category[0]);
+            }
+            categoryButton.appendChild(categoryButtonDefaultText);
             categoryContainer.appendChild(categoryButton);
             newLeaderboard.appendChild(categoryContainer);
 

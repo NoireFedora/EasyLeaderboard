@@ -44,3 +44,8 @@ body {
   font-size: 130%;
   margin-left: 30px;
 }
+
+.Content {
+  text-align: left;
+  margin-left: 30px;
+}
