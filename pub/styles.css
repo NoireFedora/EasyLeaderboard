@@ -49,3 +49,79 @@ body {
   text-align: left;
   margin-left: 30px;
 }
+
+.Leaderboard {
+  text-align: center;
+  background-color: #44b3df;
+  max-width: 300px;
+  position: fixed;
+  width: 100%;
+}
+
+.CategoryGroup {
+  text-align: center;
+  margin-bottom: 20px;
+  display:block;
+  overflow:hidden;
+}
+
+.CategoryPrefix {
+  margin-top: 10px;
+  float: left;
+  font-size: 110%;
+  display: block;
+  margin-left: 5%;
+}
+
+.CategoryButtonGroup {
+  float: right;
+  display: block;
+  margin-right: 5%;
+}
+
+.CategoryButton {
+  background-color: #4cac4f;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.CategoryList {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.CategoryList a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.CategoryList a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.Scoreboard{
+  width: 100%;
+  background-color: #f1f1c1;
+  text-align: center;
+  border-spacing: 5px;
+}
+
+table, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
