@@ -1,6 +1,6 @@
 # EasyLeaderboard.js
 
-link:
+Link:
 
 ## Getting Started
 

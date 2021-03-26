@@ -3,6 +3,11 @@ body {
   margin: 0%;
 }
 
+table {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
 .NavigationBar {
   position: sticky;
   top: 0px;
@@ -45,6 +50,13 @@ body {
   margin-left: 30px;
 }
 
+.Description {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 110%;
+}
+
 .Content {
   text-align: left;
   margin-left: 30px;
@@ -53,7 +65,7 @@ body {
 .Leaderboard {
   text-align: center;
   background-color: #44b3df;
-  max-width: 300px;
+  max-width: 400px;
   position: fixed;
   width: 100%;
 }
@@ -61,29 +73,27 @@ body {
 .CategoryGroup {
   text-align: center;
   margin-bottom: 20px;
-  display:block;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .CategoryPrefix {
+  display: inline-block;
   margin-top: 10px;
-  float: left;
+  margin-left: 15%;
   font-size: 110%;
-  display: block;
-  margin-left: 5%;
 }
 
 .CategoryButtonGroup {
-  float: right;
-  display: block;
-  margin-right: 5%;
+  display: inline-block;
+  margin-left: 5%;
+  margin-right: 15%;
 }
 
 .CategoryButton {
   background-color: #4cac4f;
   color: white;
   padding: 16px;
-  font-size: 16px;
+  font-size: 100%;
   border: none;
   cursor: pointer;
 }
@@ -95,7 +105,6 @@ body {
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .CategoryList a {
@@ -104,6 +113,7 @@ body {
   text-decoration: none;
   display: block;
   text-align: left;
+  cursor: pointer;
 }
 
 .CategoryList a:hover {
@@ -114,14 +124,13 @@ body {
   display: block;
 }
 
-.Scoreboard{
+.Scoreboard {
   width: 100%;
   background-color: #f1f1c1;
   text-align: center;
   border-spacing: 5px;
 }
 
-table, td {
-  border: 2px solid black;
-  border-collapse: collapse;
+.RankingCol {
+  width: 20%;
 }
