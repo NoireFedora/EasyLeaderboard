@@ -39,11 +39,35 @@
 			<div>
 				<h2>1. Create a Default Leaderboard</h2>
 				<code  class="language-js">
-					<blockquote>const test = new EasyLeaderboard();</blockquote>
-					<blockquote>test.createLeaderboard("Example1", "Example1", "SampleLeaderboard", ["Name", "Score"], 
-                        [{"Name": "Gran", "Score": 20}, {"Name": "Djeeta", "Score": 10}]);</blockquote>
+					<blockquote>const example1 = new EasyLeaderboard();</blockquote>
+					<blockquote>example1.createLeaderboard("Example1", "Example1", "SampleLeaderboard", ["Name", "Score"], 
+                        [{"id": 1, "Name": "Gran", "Score": 10}, {"id": 2, "Name": "Djeeta", "Score": 20}, {"id": 3, "Name": "Lulia", "Score": 30}]);</blockquote>
 				</code>
 				<div id="Example1"></div>
+			</div>
+
+			<div>
+				<h2>2. Insert New Rows</h2>
+				<code  class="language-js">
+					<blockquote>example1.insertRows([{"id": 4, "Name": "Vikala", "Score": 2020}, {"id": 5, "Name": "Catura", "Score": 2021}]);</blockquote>
+				</code>
+				<div id="Example2"></div>
+			</div>
+
+			<div>
+				<h2>3. Delete a Row with given id</h2>
+				<code class="language-js">
+					<blockquote>example1.deleteRow(2);</blockquote>
+				</code>
+				<div id="Example3"></div>
+			</div>
+
+			<div>
+				<h2>4. Delete a Category with given Name</h2>
+				<code class="language-js">
+					<blockquote>example1.deleteCategory("Name");</blockquote>
+				</code>
+				<div id="Example4"></div>
 			</div>
 			
 		</div>
