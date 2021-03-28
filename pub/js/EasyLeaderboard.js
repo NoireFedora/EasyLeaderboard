@@ -2,15 +2,18 @@
 
 (function (global, document) {
 
+    // Constructor
     function EasyLeaderboard() {
         this.querySelector = undefined;
-        this.id = undefined;
+        this.uid = undefined;
         this.title = undefined;
         this.category = [];
         this.numCategory = 0;
         this.data = [];
         this.numRow = 0;
-        this.maxRow = 10;
+        this.maxRow = -1;
+        this.hiddenRow = [];
+        this.hiddenCol = [];
         // Only for convenience
         this.tableId = undefined;
         this.categoryListId = undefined;
@@ -18,12 +21,13 @@
         this.colGroupId = undefined;
     }
 
-    // Helper function for showing Button Dropdown
+    // Helper Functions
+    // - Helper function for showing Button Dropdown
     function showCategory(id) {
         document.getElementById(id).classList.toggle("show");
     }
 
-    // Helper function for Sorting target Leaderboard by given Category
+    // - Helper function for Sorting target Leaderboard by given Category
     function changeSorting(buttonId, text, tableId, categoryListId) {
         // Change Button Text
         document.getElementById(buttonId).textContent = text;
@@ -67,7 +71,7 @@
         resetRanking(tableId);
     }
 
-    // Helper function for reset the ranking of target Leaderboard
+    // - Helper function for reset the ranking of target Leaderboard
     function resetRanking(tableId) {
         var tableBody =  document.getElementById(tableId);
         var rows = tableBody.rows;
@@ -76,13 +80,24 @@
         }
     }
 
+    // - Helper function for get current Categories in table
+    function getCategories(categoryListId){
+        var result = []
+        var categoryList =  document.getElementById(categoryListId);
+        for (var i = 0; i < categoryList.childElementCount; i++){
+            result.push(categoryList.children[i].innerText);
+        }
+        return result;
+    }
+
+    // Functions
     EasyLeaderboard.prototype = {
 
         // Create a Leaderboard
         createLeaderboard: function(querySelector, id, title, category, data){
 
             this.querySelector = querySelector;
-            this.id = id;
+            this.uid = "Leaderboard-" + id;
             this.title = title;
             this.category = category;
             this.numCategory = this.category.length;
@@ -93,12 +108,12 @@
             
             const newLeaderboard = document.createElement('div');
             newLeaderboard.className = "Leaderboard";
-            newLeaderboard.setAttribute("id", "Leaderboard-" + id);
+            newLeaderboard.setAttribute("id", this.uid);
             
             // - Title
             // Maybe Better Style
             const titleContainer = document.createElement("h2");
-            titleContainer.setAttribute("id", "Leaderboard-" + id + "-Title");
+            titleContainer.setAttribute("id", this.uid + "-Title");
             const titleText = document.createTextNode(title);
             titleContainer.appendChild(titleText);
             newLeaderboard.appendChild(titleContainer);
@@ -117,7 +132,7 @@
             categoryButtonContainer.className = "CategoryButtonGroup";
             const categoryButton = document.createElement('BUTTON');
             categoryButton.className = "CategoryButton";
-            categoryButton.setAttribute("id", "Leaderboard-" + id + "-CategoryButton");
+            categoryButton.setAttribute("id", this.uid + "-CategoryButton");
             var categoryButtonDefaultText = "Category";
             if (this.numCategory != 0)
             {
@@ -126,11 +141,11 @@
             categoryButton.appendChild(categoryButtonDefaultText);
             const categoryList = document.createElement('div');
             categoryList.className = "CategoryList";
-            categoryList.setAttribute("id", "Leaderboard-" + id + "-CategoryList");
-            this.categoryListId = "Leaderboard-" + id + "-CategoryList";
+            categoryList.setAttribute("id", this.uid + "-CategoryList");
+            this.categoryListId = this.uid + "-CategoryList";
             for (var i = 0; i < category.length; i++) {
                 const categoryName = document.createElement('a');
-                categoryName.setAttribute("id", "Leaderboard-" + id + "-CategoryList-" + this.category[i]);
+                categoryName.setAttribute("id", this.uid + "-CategoryList-" + this.category[i]);
                 const text = this.category[i]
                 const index = i;
                 categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList")};
@@ -149,8 +164,8 @@
             scoreboard.className = "Scoreboard";
             // -- Column Group
             const columnGroup = document.createElement('colgroup');
-            columnGroup.setAttribute("id", "Leaderboard-" + id + "-ColumnGroup");
-            this.colGroupId = "Leaderboard-" + id + "-ColumnGroup";
+            columnGroup.setAttribute("id", this.uid + "-ColumnGroup");
+            this.colGroupId = this.uid + "-ColumnGroup";
             // --- Ranking
             const rankingCol = document.createElement('col');
             rankingCol.className = "RankingCol";
@@ -158,7 +173,7 @@
             // --- Other Columns
             for (var numCol = 0; numCol < this.numCategory; numCol++){
                 const newCol = document.createElement('col');
-                newCol.setAttribute("id", "Leaderboard-" + id + "-ColumnGroup-" + this.category[numCol])
+                newCol.setAttribute("id", this.uid + "-ColumnGroup-" + this.category[numCol])
                 columnGroup.appendChild(newCol);
             }
 
@@ -168,8 +183,8 @@
             const tableHead = document.createElement('thead');
             const attributes = document.createElement('tr');
             attributes.className = "Attributes";
-            attributes.setAttribute("id", "Leaderboard-" + id + "-Attributes");
-            this.tableHeadId = "Leaderboard-" + id + "-Attributes";
+            attributes.setAttribute("id", this.uid + "-Attributes");
+            this.tableHeadId = this.uid + "-Attributes";
             const attributeRanking = document.createElement('th');
             attributeRanking.appendChild(document.createTextNode("Ranking"));
             attributes.appendChild(attributeRanking);
@@ -183,11 +198,11 @@
             scoreboard.appendChild(tableHead);
             // -- Data
             const tableBody = document.createElement('tbody');
-            tableBody.setAttribute("id", "Leaderboard-" + id + "-Data");
-            this.tableId = "Leaderboard-" + id + "-Data";
+            tableBody.setAttribute("id", this.uid + "-Data");
+            this.tableId = this.uid + "-Data";
             for (var row = 0; row < this.data.length; row++) {
                 const newRow = document.createElement('tr');
-                newRow.setAttribute("id", "Leaderboard-" + id + "-Data-" + this.data[row]["id"]);
+                newRow.setAttribute("id", this.uid + "-Data-" + this.data[row]["id"]);
                 const newRanking = document.createElement('td');
                 const rankingText = document.createTextNode(row + 1);
                 newRanking.appendChild(rankingText);
@@ -219,6 +234,7 @@
             var table = document.getElementById(this.tableId);
             for (var row = 0; row < data.length; row++){
                 var newRow = table.insertRow();
+                newRow.setAttribute("id", this.uid + "-Data-" + data[row]["id"]);
                 var newRanking = newRow.insertCell();
                 newRanking.innerText = count;
                 count++;
@@ -274,21 +290,140 @@
 
         },
 
-        // UpdateLeaderboard with current stored data
-        updateLeaderboard: function(){
+        // Recreate a Leaderboard with current stored data in the current insert position.
+        recoverLeaderboard: function(){
+
+            var originalTable = document.getElementById(this.uid);
+            originalTable.removeChild(originalTable.childNodes[0]);
+            this.createLeaderboard(this.querySelector, this.id, this.title, this.category, this.data);
 
         },
 
-        hideRow: function(){
+        // Hide Row with given id
+        hideRow: function(id){
+
+            var target = document.getElementById(this.tableId + "-" + id);
+
+            if (target){
+                target.style = "visibility: collapse";
+                resetRanking(this.tableId);
+                this.hiddenRow.push(id);
+            }
 
         },
 
-        hideCategory: function(){
+        // Show Row with given id
+        showRow: function(id){
+
+            if (this.hiddenRow.includes(id)){
+                var table = document.getElementById(this.tableId);
+                var newRow = table.insertRow();
+                newRow.setAttribute("id", this.tableId + "-" + id);
+                var newRanking = newRow.insertCell();
+                newRanking.innerText = 0;
+                const currentCategories = getCategories(this.categoryListId);
+                for (var i = 0; i < currentCategories.length; i++){
+                    var newData = newRow.insertCell();
+                    for (var index = 0; index < this.data.length; index++){
+                        if (this.data[index]["id"] == id){
+                            newData.innerHTML = this.data[index][currentCategories[i]];
+                            break;
+                        }
+                    }
+                }
+                this.hiddenRow.splice(this.hiddenRow.indexOf(id), 1);
+                resetRanking(this.tableId);
+            }
 
         },
 
-        setMaximumRow: function(){
+        // Hide Category with given name
+        hideCategory: function(category){
 
+            const index = getCategories(this.categoryListId).indexOf(category);
+
+            var target = document.getElementById(this.categoryListId + "-" + category);
+            if (target){
+                target.remove();
+            }
+            else{
+                return;
+            }
+
+            var colGroup = document.getElementById(this.colGroupId + "-" + category);
+            colGroup.remove();
+
+            var tableHead = document.getElementById(this.tableHeadId);
+            tableHead.deleteCell(index + 1);
+
+            var table = document.getElementById(this.tableId);
+            for (var row = 0; row < this.numRow; row++){
+                table.rows[row].deleteCell(index + 1);
+            }
+
+            this.hiddenCol.push(category)
+        },
+
+        // Show Category with given name
+        showCategory: function(category){
+
+            if(this.hiddenCol.includes(category)){
+
+                const index = this.category.indexOf(category);
+
+                var categoryList = document.getElementById(this.categoryListId);
+                const categoryName = document.createElement('a');
+                categoryName.setAttribute("id", this.uid + "-CategoryList-" + category);
+                const text = category;
+                categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList")};
+                const categoryText = document.createTextNode(category);
+                categoryName.appendChild(categoryText);
+                if (index != this.category.length){
+                    categoryList.insertBefore(categoryName, categoryList.childNodes[index + 1]);
+                }
+                else{
+                    categoryList.appendChild(categoryName);
+                }
+
+                var colGroup = document.getElementById(this.colGroupId);
+                const newCol = document.createElement('col');
+                newCol.setAttribute("id", this.uid + "-ColumnGroup-" + category);
+                if (index != this.category.length){
+                    colGroup.insertBefore(newCol, colGroup.childNodes[index + 1]);
+                }
+                else{
+                    colGroup.appendChild(newCol);
+                }
+
+                var tableHead = document.getElementById(this.tableHeadId);
+                tableHead.insertCell(index + 1).outerHTML = "<th>" + category + "</th>";
+
+                var filteredData = []
+                for (var i = 0; i < this.data.length; i++){
+                    var check = false;
+                    for (var h = 0; h < this.hiddenRow; h++) {
+                        if (this.data[i]["id"] == this.hiddenRow[h]){
+                            check = true;
+                        }
+                    }
+                    if (check == false){
+                        filteredData.push(this.data[i]);
+                    }
+                }
+                for (var row = 0; row < filteredData.length; row++) {
+                    var currentRow = document.getElementById(this.uid + "-Data-" + filteredData[row]["id"]);
+                    var newCell = currentRow.insertCell(index + 1);
+                    newCell.innerHTML = filteredData[row][category];
+                }
+
+                this.hiddenCol.splice(this.hiddenCol.indexOf(category), 1);
+            }
+
+        },
+
+        // Set Maximun number of visable Rows
+        setMaximumRow: function(max){
+            this.maxRow = max;
         },
 
         setLink: function(){
