@@ -75,8 +75,12 @@
     function resetRanking(tableId) {
         var tableBody =  document.getElementById(tableId);
         var rows = tableBody.rows;
+        var count = 1;
         for (var i = 0; i < rows.length; i++){
-            rows[i].getElementsByTagName("TD")[0].innerText = i + 1;
+            if (window.getComputedStyle(rows[i]).visibility === "visible"){
+                rows[i].getElementsByTagName("TD")[0].innerText = count;
+                count++;
+            }
         }
     }
 
@@ -305,9 +309,8 @@
             var target = document.getElementById(this.tableId + "-" + id);
 
             if (target){
-                target.style = "visibility: collapse";
+                target.style.visibility = "collapse";
                 resetRanking(this.tableId);
-                this.hiddenRow.push(id);
             }
 
         },
@@ -315,23 +318,10 @@
         // Show Row with given id
         showRow: function(id){
 
-            if (this.hiddenRow.includes(id)){
-                var table = document.getElementById(this.tableId);
-                var newRow = table.insertRow();
-                newRow.setAttribute("id", this.tableId + "-" + id);
-                var newRanking = newRow.insertCell();
-                newRanking.innerText = 0;
-                const currentCategories = getCategories(this.categoryListId);
-                for (var i = 0; i < currentCategories.length; i++){
-                    var newData = newRow.insertCell();
-                    for (var index = 0; index < this.data.length; index++){
-                        if (this.data[index]["id"] == id){
-                            newData.innerHTML = this.data[index][currentCategories[i]];
-                            break;
-                        }
-                    }
-                }
-                this.hiddenRow.splice(this.hiddenRow.indexOf(id), 1);
+            var target = document.getElementById(this.tableId + "-" + id);
+
+            if (target){
+                target.style.visibility = "visible";
                 resetRanking(this.tableId);
             }
 
@@ -361,7 +351,8 @@
                 table.rows[row].deleteCell(index + 1);
             }
 
-            this.hiddenCol.push(category)
+            this.hiddenCol.push(category);
+            
         },
 
         // Show Category with given name
@@ -375,7 +366,8 @@
                 const categoryName = document.createElement('a');
                 categoryName.setAttribute("id", this.uid + "-CategoryList-" + category);
                 const text = category;
-                categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList")};
+                const uid = this.uid;
+                categoryName.onclick = function() {changeSorting(uid + "-CategoryButton", text, uid + "-Data", uid + "-CategoryList")};
                 const categoryText = document.createTextNode(category);
                 categoryName.appendChild(categoryText);
                 if (index != this.category.length){
@@ -398,22 +390,10 @@
                 var tableHead = document.getElementById(this.tableHeadId);
                 tableHead.insertCell(index + 1).outerHTML = "<th>" + category + "</th>";
 
-                var filteredData = []
-                for (var i = 0; i < this.data.length; i++){
-                    var check = false;
-                    for (var h = 0; h < this.hiddenRow; h++) {
-                        if (this.data[i]["id"] == this.hiddenRow[h]){
-                            check = true;
-                        }
-                    }
-                    if (check == false){
-                        filteredData.push(this.data[i]);
-                    }
-                }
-                for (var row = 0; row < filteredData.length; row++) {
-                    var currentRow = document.getElementById(this.uid + "-Data-" + filteredData[row]["id"]);
+                for (var row = 0; row < this.data.length; row++) {
+                    var currentRow = document.getElementById(this.uid + "-Data-" + this.data[row]["id"]);
                     var newCell = currentRow.insertCell(index + 1);
-                    newCell.innerHTML = filteredData[row][category];
+                    newCell.innerHTML = this.data[row][category];
                 }
 
                 this.hiddenCol.splice(this.hiddenCol.indexOf(category), 1);
@@ -424,6 +404,15 @@
         // Set Maximun number of visable Rows
         setMaximumRow: function(max){
             this.maxRow = max;
+            var table = document.getElementById(this.tableId);
+            for (var row = 0; row < table.rows.length; row++){
+                if (row < 10){
+                    table.rows[row].style = "visibility: collapse";
+                }
+                else{
+                    table.rows[row].style = "visibility: visible";
+                }
+            }
         },
 
         setLink: function(){
