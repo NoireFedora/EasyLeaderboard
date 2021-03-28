@@ -45,6 +45,11 @@ function examples() {
     showButton2.onclick = function() {example6.showCategory("Score")};
     document.getElementById("Example6-Show").append(showButton2);
 
+    const example7 = new EasyLeaderboard();
+    example7.createLeaderboard("Example7", "Example7", "SampleLeaderboard", ["Name", "Score"], exampleData);
+    example7.insertRows(exampleNewData);
+    example7.setMaximumRow(3);
+
 }
 
 examples();

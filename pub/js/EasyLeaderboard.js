@@ -28,7 +28,7 @@
     }
 
     // - Helper function for Sorting target Leaderboard by given Category
-    function changeSorting(buttonId, text, tableId, categoryListId) {
+    function changeSorting(buttonId, text, tableId, categoryListId, maxRow) {
         // Change Button Text
         document.getElementById(buttonId).textContent = text;
         // Change the order of Table Body
@@ -68,6 +68,18 @@
                 isSorting = true;
             }
         }
+
+        if (maxRow >= 0){
+            for (var row = 0; row < tableBody.rows.length; row++){
+                if (row < maxRow){
+                    tableBody.rows[row].style = "visibility: visible";
+                }
+                else{
+                    tableBody.rows[row].style = "visibility: collapse";
+                }
+            }
+        }
+
         resetRanking(tableId);
     }
 
@@ -152,7 +164,7 @@
                 categoryName.setAttribute("id", this.uid + "-CategoryList-" + this.category[i]);
                 const text = this.category[i]
                 const index = i;
-                categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList")};
+                categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList", -1)};
                 const categoryText = document.createTextNode(category[i]);
                 categoryName.appendChild(categoryText);
                 categoryList.appendChild(categoryName);
@@ -367,7 +379,8 @@
                 categoryName.setAttribute("id", this.uid + "-CategoryList-" + category);
                 const text = category;
                 const uid = this.uid;
-                categoryName.onclick = function() {changeSorting(uid + "-CategoryButton", text, uid + "-Data", uid + "-CategoryList")};
+                const maxRow = this.maxRow;
+                categoryName.onclick = function() {changeSorting(uid + "-CategoryButton", text, uid + "-Data", uid + "-CategoryList", maxRow)};
                 const categoryText = document.createTextNode(category);
                 categoryName.appendChild(categoryText);
                 if (index != this.category.length){
@@ -402,23 +415,30 @@
         },
 
         // Set Maximun number of visable Rows
-        setMaximumRow: function(max){
-            this.maxRow = max;
+        setMaximumRow: function(maxRow){
+
+            this.maxRow = maxRow;
             var table = document.getElementById(this.tableId);
             for (var row = 0; row < table.rows.length; row++){
-                if (row < 10){
-                    table.rows[row].style = "visibility: collapse";
-                }
-                else{
+                if (row < this.maxRow){
                     table.rows[row].style = "visibility: visible";
                 }
+                else{
+                    table.rows[row].style = "visibility: collapse";
+                }
             }
-        },
 
-        setLink: function(){
+            var categoryList = document.getElementById(this.categoryListId);
+            const uid = this.uid;
+            for (var index = 0; index < categoryList.childElementCount; index++){
+                const category = categoryList.children[index].innerText;
+                categoryList.children[index].onclick = function(){
+                    changeSorting(uid + "-CategoryButton", category, uid + "-Data", uid + "-CategoryList", maxRow)
+                }
+            }
             
         }
-
+        
     }
 
     global.EasyLeaderboard = global.EasyLeaderboard || EasyLeaderboard;
