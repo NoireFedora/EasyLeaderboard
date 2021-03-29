@@ -1,6 +1,6 @@
 # EasyLeaderboard.js
 
-Link: https://lit-bastion-97835.herokuapp.com/index.html
+Link: https://easyleaderboard.herokuapp.com/index.html
 
 ## Getting Started
 
