@@ -31,6 +31,155 @@
             <h1>Documentation</h1>
         </div>
 
+        <div class="Content">
+
+            <h2>Getting Started</h2>
+            <p>
+                At first, you need to include this library and its style sheet in the <b>Head</b> part of your html file.
+                <code class="language-js">
+					<blockquote>&lt;script defer type="text/javascript" src='EasyLeaderboard.js'&gt;&lt;/script&gt;</blockquote>
+                    <blockquote>&lt;link rel="stylesheet" type="text/css" href="./styles.css"&gt;&lt;/link&gt;</blockquote>
+				</code>
+            </p>
+            <p>
+                To create a new Leaderboard, you need to have a div tag with a unique Id in the <b>Body</b> part of your html file. <br>
+                Here is an example:
+                <code class="language-js">
+                    <blockquote>&lt;div id="Example1"&gt;&lt;/div&gt;</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h2>Constructors</h2>
+            <h3>createLeaderboard(querySelector, id, title, category, data)</h3>
+            <p>
+                This function will create a Default Leaderboard based on given parameters. <br>
+                <b>querySelector:</b> String, the position you want to insert in html. In the previous example, "Example1" will be querySelector <br>
+                <b>id:</b> String, unique id for this Leaderboard<br>
+                <b>title:</b> String, title for this Leaderboard<br>
+                <b>category:</b> Array includes String only, categories for the Leaderboard, which decides how many columns this Leaderboard will has<br>
+                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category plus "id" (unique id), the content you want to display in Leaderboard<br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>const example1 = new EasyLeaderboard();</blockquote>
+					<blockquote>example1.createLeaderboard("Example1", "Example1", "SampleLeaderboard", ["Name", "Score"], 
+                        [{"id": 1, "Name": "Gran", "Score": 10}, {"id": 2, "Name": "Djeeta", "Score": 20}, {"id": 3, "Name": "Lulia", "Score": 30}]);</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h2>Common Functions</h2>
+            <h3>insertRows(data)</h3>
+            <p> 
+                This function will insert a new Row(s) in Leaderboard based on given data. <br>
+                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category plus "id" (unique id) <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example1.insertRows([{"id": 4, "Name": "Vikala", "Score": 2020}, {"id": 5, "Name": "Catura", "Score": 2021}]);</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>deleteRow(id)</h3>
+            <p>
+                This function will delete a Row in Leaderboard based on given id. <br>
+                <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example1.deleteRow(2);</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>deleteCategory(category)</h3>
+            <p>
+                This function will delete a Category in Leaderboard based on given name. <br>
+                <b>Note:</b> addCategory() is not provided since I recommend you to directly make a new Leaderboard to replace the old one if you want to add Category. <br>
+                <b>category:</b> String, the name of target Category <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example1.deleteCategory("Name");</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>hideRow(id)</h3>
+            <p>
+                This function will hide (not delete) a Row based on given id. <br>
+                <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example2.hideRow(2)</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>showRow(id)</h3>
+            <p>
+                This function will show a hidden Row based on given id. <br>
+                <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example2.showRow(2)</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>hideCategory(category)</h3>
+            <p>
+                This function will hide (not delete) a Category based on given name. <br>
+                <b>category:</b> String, the name of target Category <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example2.hideCategory("Score")</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>showCategory(category)</h3>
+            <p>
+                This function will show a hidden Category based on given name. <br>
+                <b>category:</b> String, the name of target Category <br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example2.showCategory("Score")</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>setMaximumRow(maxRow)</h3>
+            <p>
+                This function will set a limit on the maximum number of visible rows<br>
+                <b>category:</b> Positive Integer, the maximum number of visible rows<br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <code  class="language-js">
+					<blockquote>example2.setMaximumRow(3)</blockquote>
+                </code>
+                <br>
+            </p>
+
+            <h3>recoverLeaderboard()</h3>
+            <p>
+                This function for backup will delete the old Leaderboard and insert a new Leaderboard based on data stored in this Leaderboard Object, basically is used to show all hidden row and categories.
+                <br>
+                <b>Example Code</b>: <br>
+                <code  class="language-js">
+					<blockquote>example1.recoverLeaderboard()</blockquote>
+                </code>
+                <br>
+            </p>
+
+        </div>
+
     </body>
 
 </html>
