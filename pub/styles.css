@@ -4,7 +4,6 @@ body {
 }
 
 table {
-  border: 2px solid black;
   border-collapse: collapse;
 }
 
@@ -75,8 +74,7 @@ td {
 .Leaderboard {
   text-align: center;
   background-color: #bbbbbb;
-  max-width: 400px;
-  width: 100%;
+  width: 30%;
   padding: 0.5%;
   border: 2px solid black;
 }
@@ -140,8 +138,14 @@ td {
   background-color: #f1f1c1;
   text-align: center;
   border-spacing: 5px;
+  box-sizing: border-box;
 }
 
 .RankingCol {
   width: 20%;
+}
+
+.Icon {
+  height: 80px;
+  width: 80px;
 }

@@ -46,8 +46,8 @@
             rows = tableBody.rows;
             for (i = 0; i < rows.length - 1; i++){
                 needSorting = false;
-                x = rows[i].getElementsByTagName("TD")[index + 1];
-                y = rows[i + 1].getElementsByTagName("TD")[index + 1];
+                x = rows[i].getElementsByTagName("TD")[index + 2];
+                y = rows[i + 1].getElementsByTagName("TD")[index + 2];
                 const xNum = parseFloat(x.innerHTML.toLowerCase());
                 const yNum = parseFloat(y.innerHTML.toLowerCase());
                 if (!isNaN(xNum) && !isNaN(yNum)){
@@ -127,7 +127,6 @@
             newLeaderboard.setAttribute("id", this.uid);
             
             // - Title
-            // Maybe Better Style
             const titleContainer = document.createElement("h2");
             titleContainer.setAttribute("id", this.uid + "-Title");
             const titleText = document.createTextNode(title);
@@ -163,7 +162,6 @@
                 const categoryName = document.createElement('a');
                 categoryName.setAttribute("id", this.uid + "-CategoryList-" + this.category[i]);
                 const text = this.category[i]
-                const index = i;
                 categoryName.onclick = function() {changeSorting("Leaderboard-" + id + "-CategoryButton", text, "Leaderboard-" + id + "-Data", "Leaderboard-" + id + "-CategoryList", -1)};
                 const categoryText = document.createTextNode(category[i]);
                 categoryName.appendChild(categoryText);
@@ -186,6 +184,10 @@
             const rankingCol = document.createElement('col');
             rankingCol.className = "RankingCol";
             columnGroup.appendChild(rankingCol);
+            // --- Icon
+            const iconCol = document.createElement('col');
+            iconCol.className = "IconCol";
+            columnGroup.appendChild(iconCol);
             // --- Other Columns
             for (var numCol = 0; numCol < this.numCategory; numCol++){
                 const newCol = document.createElement('col');
@@ -195,15 +197,19 @@
 
             scoreboard.appendChild(columnGroup);
             // -- Attributes (Attributes here are Categories)
-            // --- Ranking
             const tableHead = document.createElement('thead');
             const attributes = document.createElement('tr');
             attributes.className = "Attributes";
             attributes.setAttribute("id", this.uid + "-Attributes");
             this.tableHeadId = this.uid + "-Attributes";
+            // --- Ranking
             const attributeRanking = document.createElement('th');
             attributeRanking.appendChild(document.createTextNode("Ranking"));
             attributes.appendChild(attributeRanking);
+            // --- Icon
+            const attributeIcon = document.createElement('th');
+            attributeIcon.appendChild(document.createTextNode("Icon"));
+            attributes.appendChild(attributeIcon);
             // --- Customized Attributes
             for (var index = 0; index < this.numCategory; index++){
                 const newAttribute = document.createElement('th');
@@ -223,6 +229,12 @@
                 const rankingText = document.createTextNode(row + 1);
                 newRanking.appendChild(rankingText);
                 newRow.appendChild(newRanking);
+                const newIcon = document.createElement('td');
+                const defaultImage = document.createElement('img');
+                defaultImage.src =  "user.png";
+                defaultImage.className = "Icon";
+                newIcon.appendChild(defaultImage);
+                newRow.appendChild(newIcon);
                 for (var col = 0; col < this.numCategory; col++) {
                     const newElement = document.createElement('td');
                     const elementText = document.createTextNode(this.data[row][this.category[col]]);
@@ -232,6 +244,11 @@
                 tableBody.appendChild(newRow);
             }
             scoreboard.appendChild(tableBody);
+            // -- Table Foot (Not Used)
+            const tableFoot = document.createElement('tfoot');
+            this.tableFootId = this.uid + "-TableFoot";
+            tableFoot.setAttribute("id", this.uid + "-TableFoot");
+            scoreboard.appendChild(tableFoot);
 
             newLeaderboard.appendChild(scoreboard);
 
@@ -253,6 +270,11 @@
                 newRow.setAttribute("id", this.uid + "-Data-" + data[row]["id"]);
                 var newRanking = newRow.insertCell();
                 newRanking.innerText = count;
+                var newIcon = newRow.insertCell();
+                const defaultImage = document.createElement('img');
+                defaultImage.src =  "user.png";
+                defaultImage.className = "Icon";
+                newIcon.append(defaultImage);
                 count++;
                 for (var col = 0; col < this.numCategory; col++){
                     var newData = newRow.insertCell();
@@ -297,11 +319,11 @@
             colGroup.remove();
 
             var tableHead = document.getElementById(this.tableHeadId);
-            tableHead.deleteCell(index + 1);
+            tableHead.deleteCell(index + 2);
 
             var table = document.getElementById(this.tableId);
             for (var row = 0; row < this.numRow; row++){
-                table.rows[row].deleteCell(index + 1);
+                table.rows[row].deleteCell(index + 2);
             }
 
         },
@@ -356,11 +378,11 @@
             colGroup.remove();
 
             var tableHead = document.getElementById(this.tableHeadId);
-            tableHead.deleteCell(index + 1);
+            tableHead.deleteCell(index + 2);
 
             var table = document.getElementById(this.tableId);
             for (var row = 0; row < this.numRow; row++){
-                table.rows[row].deleteCell(index + 1);
+                table.rows[row].deleteCell(index + 2);
             }
 
             this.hiddenCol.push(category);
@@ -384,7 +406,7 @@
                 const categoryText = document.createTextNode(category);
                 categoryName.appendChild(categoryText);
                 if (index != this.category.length){
-                    categoryList.insertBefore(categoryName, categoryList.childNodes[index + 1]);
+                    categoryList.insertBefore(categoryName, categoryList.childNodes[index + 2]);
                 }
                 else{
                     categoryList.appendChild(categoryName);
@@ -394,18 +416,18 @@
                 const newCol = document.createElement('col');
                 newCol.setAttribute("id", this.uid + "-ColumnGroup-" + category);
                 if (index != this.category.length){
-                    colGroup.insertBefore(newCol, colGroup.childNodes[index + 1]);
+                    colGroup.insertBefore(newCol, colGroup.childNodes[index + 2]);
                 }
                 else{
                     colGroup.appendChild(newCol);
                 }
 
                 var tableHead = document.getElementById(this.tableHeadId);
-                tableHead.insertCell(index + 1).outerHTML = "<th>" + category + "</th>";
+                tableHead.insertCell(index + 2).outerHTML = "<th>" + category + "</th>";
 
                 for (var row = 0; row < this.data.length; row++) {
                     var currentRow = document.getElementById(this.uid + "-Data-" + this.data[row]["id"]);
-                    var newCell = currentRow.insertCell(index + 1);
+                    var newCell = currentRow.insertCell(index + 2);
                     newCell.innerHTML = this.data[row][category];
                 }
 
@@ -437,7 +459,7 @@
                 }
             }
             
-        }
+        },
         
     }
 
