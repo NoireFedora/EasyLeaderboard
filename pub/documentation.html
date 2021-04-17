@@ -36,17 +36,21 @@
             <h2>Getting Started</h2>
             <p>
                 At first, you need to include this library and its style sheet in the <b>Head</b> part of your html file.
+                <div class="CodeBackground2">
                 <code class="language-js">
 					<blockquote>&lt;script defer type="text/javascript" src='EasyLeaderboard.js'&gt;&lt;/script&gt;</blockquote>
                     <blockquote>&lt;link rel="stylesheet" type="text/css" href="./styles.css"&gt;&lt;/link&gt;</blockquote>
 				</code>
+                </div>
             </p>
             <p>
                 To create a new Leaderboard, you need to have a div tag with a unique Id in the <b>Body</b> part of your html file. <br>
                 Here is an example:
+                <div class="CodeBackground">
                 <code class="language-js">
                     <blockquote>&lt;div id="Example1"&gt;&lt;/div&gt;</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -58,14 +62,16 @@
                 <b>id:</b> String, unique id for this Leaderboard<br>
                 <b>title:</b> String, title for this Leaderboard<br>
                 <b>category:</b> Array includes String only, categories for the Leaderboard, which decides how many columns this Leaderboard will has<br>
-                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category plus "id" (unique id), the content you want to display in Leaderboard<br>
+                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category and "id" (unique id), the content you want to display in Leaderboard<br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground2">
+                <code class="language-js">
 					<blockquote>const example1 = new EasyLeaderboard();</blockquote>
 					<blockquote>example1.createLeaderboard("Example1", "Example1", "SampleLeaderboard", ["Name", "Score"], 
                         [{"id": 1, "Name": "Gran", "Score": 10}, {"id": 2, "Name": "Djeeta", "Score": 20}, {"id": 3, "Name": "Lulia", "Score": 30}]);</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -76,9 +82,11 @@
                 <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category plus "id" (unique id) <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground2">
+                <code class="language-js">
 					<blockquote>example1.insertRows([{"id": 4, "Name": "Vikala", "Score": 2020}, {"id": 5, "Name": "Catura", "Score": 2021}]);</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -88,9 +96,11 @@
                 <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example1.deleteRow(2);</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -101,9 +111,11 @@
                 <b>category:</b> String, the name of target Category <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example1.deleteCategory("Name");</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -113,9 +125,11 @@
                 <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example2.hideRow(2)</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -125,33 +139,26 @@
                 <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example2.showRow(2)</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
             <h3>hideCategory(category)</h3>
             <p>
                 This function will hide (not delete) a Category based on given name. <br>
+                <b>Note:</b> showCategory(category) is deleted since it has critical issues. I recommend you to directly reset the Leaderboard(call recoverLeaderboard()) if you want to show all Category. <br> <br>
                 <b>category:</b> String, the name of target Category <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example2.hideCategory("Score")</blockquote>
                 </code>
-                <br>
-            </p>
-
-            <h3>showCategory(category)</h3>
-            <p>
-                This function will show a hidden Category based on given name. <br>
-                <b>category:</b> String, the name of target Category <br>
-                <br>
-                <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
-					<blockquote>example2.showCategory("Score")</blockquote>
-                </code>
+                </div>
                 <br>
             </p>
 
@@ -161,9 +168,11 @@
                 <b>category:</b> Positive Integer, the maximum number of visible rows<br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example2.setMaximumRow(3)</blockquote>
                 </code>
+                </div>
                 <br>
             </p>
 
@@ -172,9 +181,26 @@
                 This function for backup will delete the old Leaderboard and insert a new Leaderboard based on data stored in this Leaderboard Object, basically is used to show all hidden row and categories.
                 <br>
                 <b>Example Code</b>: <br>
-                <code  class="language-js">
+                <div class="CodeBackground">
+                <code class="language-js">
 					<blockquote>example1.recoverLeaderboard()</blockquote>
                 </code>
+                </div>
+                <br>
+            </p>
+
+            <h3>changeUserIcon(id, newSrc)</h3>
+            <p>
+                This function can change user icon based on given row id and new Src.<br>
+                <b>id:</b> Integer, unique id of row in Leaderboard, which is stored in dictionary mentioned above<br>
+                <b>newSrc:</b> String, the URL of the new Icon.<br>
+                <br>
+                <b>Example Code (See Examples page for actual performance)</b>: <br>
+                <div class="CodeBackground">
+                <code class="language-js">
+					<blockquote>example2.changeUserIcon(2, "test.jpg")</blockquote>
+                </code>
+                </div>
                 <br>
             </p>
 
