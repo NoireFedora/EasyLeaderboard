@@ -9,11 +9,29 @@ function examples() {
     const example2 = new EasyLeaderboard();
     example2.createLeaderboard("Example2", "Example2", "SampleLeaderboard", ["Name", "Score"], exampleData);
     example2.insertRows(exampleNewData);
+    const insertData = document.querySelector("#insertData");
+    insertData.addEventListener('submit', insertRow);
+    var count = 6;
+    function insertRow(e) {
+        e.preventDefault();
+        const name = document.querySelector('#insertName').value;
+        const score = document.querySelector('#insertScore').value;
+        const newRow = [{"id": count, "Name": name, "Score": score}];
+        count++;
+        example2.insertRows(newRow);
+    }
 
     const example3 = new EasyLeaderboard();
     example3.createLeaderboard("Example3", "Example3", "SampleLeaderboard", ["Name", "Score"], exampleData);
     example3.insertRows(exampleNewData);
     example3.deleteRow(2);
+    const deleteData = document.querySelector("#deleteData");
+    deleteData.addEventListener('submit', deleteRow);
+    function deleteRow(e) {
+        e.preventDefault();
+        const id = document.querySelector('#deleteUser').value;
+        example3.deleteRow(parseInt(id));
+    }
 
     const example4 = new EasyLeaderboard();
     example4.createLeaderboard("Example4", "Example4", "SampleLeaderboard", ["Name", "Score"], exampleData);
@@ -32,6 +50,20 @@ function examples() {
     showButton.innerText = "Show";
     showButton.onclick = function() {example5.showRow(2)};
     document.getElementById("Example5-Show").append(showButton);
+    const hideData = document.querySelector("#hideData");
+    hideData.addEventListener('submit', hideRow);
+    function hideRow(e) {
+        e.preventDefault();
+        const id = document.querySelector('#hideUser').value;
+        example5.hideRow(parseInt(id));
+    }
+    const showData = document.querySelector("#showData");
+    showData.addEventListener('submit', showRow);
+    function showRow(e) {
+        e.preventDefault();
+        const id = document.querySelector('#showUser').value;
+        example5.showRow(parseInt(id));
+    }
 
     const example6 = new EasyLeaderboard();
     example6.createLeaderboard("Example6", "Example6", "SampleLeaderboard", ["Name", "Score"], exampleData);
@@ -40,15 +72,37 @@ function examples() {
     hideButton2.innerText = "Hide";
     hideButton2.onclick = function() {example6.hideCategory("Score")};
     document.getElementById("Example6-Hide").append(hideButton2);
-    const showButton2 = document.createElement("BUTTON");
-    showButton2.innerText = "Show";
-    showButton2.onclick = function() {example6.showCategory("Score")};
-    document.getElementById("Example6-Show").append(showButton2);
+    const hideColumn = document.querySelector("#hideColumn");
+    hideColumn.addEventListener('submit', hideCategory);
+    function hideCategory(e) {
+        e.preventDefault();
+        const category = document.querySelector('#hideCategory').value;
+        example6.hideCategory(category);
+    }
+    const recovery = document.querySelector("#recovery");
+    recovery.addEventListener('submit', recoverAll);
+    function recoverAll(e) {
+        e.preventDefault();
+        example6.recoverLeaderboard();
+    }
+    
 
     const example7 = new EasyLeaderboard();
     example7.createLeaderboard("Example7", "Example7", "SampleLeaderboard", ["Name", "Score"], exampleData);
     example7.insertRows(exampleNewData);
     example7.setMaximumRow(3);
+    const setMaximum = document.querySelector("#setMaximum");
+    setMaximum.addEventListener('submit', setMax);
+    function setMax(e) {
+        e.preventDefault();
+        const id = document.querySelector('#maximum').value;
+        example7.setMaximumRow(parseInt(id));
+    }
+
+    const example8 = new EasyLeaderboard();
+    example8.createLeaderboard("Example8", "Example8", "SampleLeaderboard", ["Name", "Score"], exampleData);
+    example8.insertRows(exampleNewData);
+    example8.changeUserIcon(2, "test.jpg");
 
 }
 

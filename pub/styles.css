@@ -77,6 +77,7 @@ td {
   width: 30%;
   padding: 0.5%;
   border: 2px solid black;
+  margin-top: 1%;
 }
 
 .CategoryGroup {
@@ -148,4 +149,14 @@ td {
 .Icon {
   height: 80px;
   width: 80px;
+}
+
+code {
+  font-family: Consolas, "courier new";
+  color: #ffffff;
+}
+
+.CodeBackground {
+  background: #001628;
+  width: 30%;
 }

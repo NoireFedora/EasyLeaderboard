@@ -295,7 +295,9 @@
 
             this.numRow = this.data.length;
             var target = document.getElementById(this.tableId + "-" + id);
-            target.remove();
+            if(target){
+                target.remove();
+            }
             resetRanking(this.tableId);
 
         },
@@ -326,12 +328,15 @@
                 table.rows[row].deleteCell(index + 2);
             }
 
+            var categoryButton = document.getElementById(this.uid + "-CategoryButton");
+            categoryButton.innerText = "Category";
+
         },
 
         // Recreate a Leaderboard with current stored data in the current insert position.
         recoverLeaderboard: function(){
 
-            var originalTable = document.getElementById(this.uid);
+            var originalTable = document.getElementById(this.querySelector);
             originalTable.removeChild(originalTable.childNodes[0]);
             this.createLeaderboard(this.querySelector, this.id, this.title, this.category, this.data);
 
@@ -389,53 +394,6 @@
             
         },
 
-        // Show Category with given name
-        showCategory: function(category){
-
-            if(this.hiddenCol.includes(category)){
-
-                const index = this.category.indexOf(category);
-
-                var categoryList = document.getElementById(this.categoryListId);
-                const categoryName = document.createElement('a');
-                categoryName.setAttribute("id", this.uid + "-CategoryList-" + category);
-                const text = category;
-                const uid = this.uid;
-                const maxRow = this.maxRow;
-                categoryName.onclick = function() {changeSorting(uid + "-CategoryButton", text, uid + "-Data", uid + "-CategoryList", maxRow)};
-                const categoryText = document.createTextNode(category);
-                categoryName.appendChild(categoryText);
-                if (index != this.category.length){
-                    categoryList.insertBefore(categoryName, categoryList.childNodes[index + 2]);
-                }
-                else{
-                    categoryList.appendChild(categoryName);
-                }
-
-                var colGroup = document.getElementById(this.colGroupId);
-                const newCol = document.createElement('col');
-                newCol.setAttribute("id", this.uid + "-ColumnGroup-" + category);
-                if (index != this.category.length){
-                    colGroup.insertBefore(newCol, colGroup.childNodes[index + 2]);
-                }
-                else{
-                    colGroup.appendChild(newCol);
-                }
-
-                var tableHead = document.getElementById(this.tableHeadId);
-                tableHead.insertCell(index + 2).outerHTML = "<th>" + category + "</th>";
-
-                for (var row = 0; row < this.data.length; row++) {
-                    var currentRow = document.getElementById(this.uid + "-Data-" + this.data[row]["id"]);
-                    var newCell = currentRow.insertCell(index + 2);
-                    newCell.innerHTML = this.data[row][category];
-                }
-
-                this.hiddenCol.splice(this.hiddenCol.indexOf(category), 1);
-            }
-
-        },
-
         // Set Maximun number of visable Rows
         setMaximumRow: function(maxRow){
 
@@ -460,6 +418,16 @@
             }
             
         },
+
+        // Change User Icon
+        changeUserIcon: function(id, newSrc){
+
+            var target = document.getElementById(this.tableId + "-" + id);
+
+            if (target){
+                target.childNodes[1].lastChild.src = newSrc;
+            }
+        }
         
     }
 
