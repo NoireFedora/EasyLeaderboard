@@ -139,7 +139,7 @@ td {
   background-color: #f1f1c1;
   text-align: center;
   border-spacing: 5px;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 .RankingCol {
@@ -164,4 +164,25 @@ code {
 .CodeBackground2 {
   background: #001628;
   width: 65%;
+}
+
+.JSObject {
+  border-collapse: separate;
+  border-spacing: 3px;
+  width: 60%;
+  box-sizing: content-box;
+  text-indent: initial;
+}
+
+.JSObject th {
+  background-color: #76996b;
+}
+
+.JSObject tr {
+  background-color: #afd473;
+  text-align: center;
+}
+
+.JSObject td {
+  padding: 10px;
 }

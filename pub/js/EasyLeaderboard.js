@@ -12,8 +12,6 @@
         this.data = [];
         this.numRow = 0;
         this.maxRow = -1;
-        this.hiddenRow = [];
-        this.hiddenCol = [];
         // Only for convenience
         this.tableId = undefined;
         this.categoryListId = undefined;
@@ -392,8 +390,6 @@
             for (var row = 0; row < this.numRow; row++){
                 table.rows[row].deleteCell(index + 2);
             }
-
-            this.hiddenCol.push(category);
             
         },
 

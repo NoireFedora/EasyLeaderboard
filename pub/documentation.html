@@ -54,15 +54,114 @@
                 <br>
             </p>
 
-            <h2>Constructors</h2>
+            
+            <h2>JS Object Explaination - EasyLeaderboard Object</h2>
+            <table class="JSObject">
+                <tbody>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Default Value</th>
+                        <th>Note</th>
+                    </tr>
+                    <tr>
+                        <td>querySelector</td>
+                        <td>String</td>
+                        <td>The position you want to insert this Leaderboard in html</td>
+                        <td>undefined</td>
+                        <td>You must provide this attribute as a parameter in the constructor. See Example Below.</td>
+                    </tr>
+                    <tr>
+                        <td>uid</td>
+                        <td>String</td>
+                        <td>Unique id for this Leaderboard</td>
+                        <td>undefined</td>
+                        <td>You must provide this attribute as a parameter in the constructor. See Example Below.</td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>String</td>
+                        <td>Title for this Leadernboard</td>
+                        <td>undefined</td>
+                        <td>You must provide this attribute as a parameter in the constructor. See Example Below.</td>
+                    </tr>
+                    <tr>
+                        <td>category</td>
+                        <td>Array includes String only</td>
+                        <td>Categories for the Leaderboard, which decides how many columns this Leaderboard will have.</td>
+                        <td>[]</td>
+                        <td>You must provide this attribute as a parameter in the constructor. See Example Below.</td>
+                    </tr>
+                    <tr>
+                        <td>numCategory</td>
+                        <td>Integer</td>
+                        <td>Number of Categories</td>
+                        <td>0</td>
+                        <td>This attribute will calculate and update automatically.</td>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>Array includes Dictionary only</td>
+                        <td>The content you want to display in this Leaderboard</td>
+                        <td>[]</td>
+                        <td>You must provide this attribute as a parameter in the constructor. See Example Below. 
+                            In addition, Dictonaries must all have the same keys and these keys must be the same as all category you provided plus "id" (unique id).</td>
+                    </tr>
+                    <tr>
+                        <td>numRow</td>
+                        <td>Integer</td>
+                        <td>Number of Rows</td>
+                        <td>0</td>
+                        <td>This attribute will calculate and update automatically.</td>
+                    </tr>
+                    <tr>
+                        <td>maxRow</td>
+                        <td>Integer</td>
+                        <td>Maximun number of visable Rows</td>
+                        <td>-1</td>
+                        <td>You will modify this value by calling setMaximumRow()</td>
+                    </tr>
+                    <tr>
+                        <td>tableId</td>
+                        <td>String</td>
+                        <td>Id of the table inside this Leaderboard</td>
+                        <td>undefined</td>
+                        <td>This attribute will be updated automatically and is stored for convenience only.</td>
+                    </tr>
+                    <tr>
+                        <td>categoryListId</td>
+                        <td>String</td>
+                        <td>Id of the dropdown content of Category Button</td>
+                        <td>undefined</td>
+                        <td>This attribute will be updated automatically and is stored for convenience only.</td>
+                    </tr>
+                    <tr>
+                        <td>tableHeadId</td>
+                        <td>String</td>
+                        <td>Id of the table head(thead) of the table inside this Leaderboard</td>
+                        <td>undefined</td>
+                        <td>This attribute will be updated automatically and is stored for convenience only.</td>
+                    </tr>
+                    <tr>
+                        <td>colGroupId</td>
+                        <td>String</td>
+                        <td>Id of the column group(colGroup) of the table inside this Leaderboard</td>
+                        <td>undefined</td>
+                        <td>This attribute will be updated automatically and is stored for convenience only.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Constructor</h2>
             <h3>createLeaderboard(querySelector, id, title, category, data)</h3>
             <p>
                 This function will create a Default Leaderboard based on given parameters. <br>
                 <b>querySelector:</b> String, the position you want to insert in html. In the previous example, "Example1" will be querySelector <br>
                 <b>id:</b> String, unique id for this Leaderboard<br>
                 <b>title:</b> String, title for this Leaderboard<br>
-                <b>category:</b> Array includes String only, categories for the Leaderboard, which decides how many columns this Leaderboard will has<br>
-                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category and "id" (unique id), the content you want to display in Leaderboard<br>
+                <b>category:</b> Array includes String only, categories for the Leaderboard, which decides how many columns this Leaderboard will have<br>
+                <b>data:</b> Array includes Dictionary only which Dictonaries must all have the same keys and these keys must be the same as category plus "id" (unique id), the content you want to display in Leaderboard<br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
                 <div class="CodeBackground2">
@@ -75,7 +174,7 @@
                 <br>
             </p>
 
-            <h2>Common Functions</h2>
+            <h2>Common Methods</h2>
             <h3>insertRows(data)</h3>
             <p> 
                 This function will insert a new Row(s) in Leaderboard based on given data. <br>
@@ -108,6 +207,7 @@
             <p>
                 This function will delete a Category in Leaderboard based on given name. <br>
                 <b>Note:</b> addCategory() is not provided since I recommend you to directly make a new Leaderboard to replace the old one if you want to add Category. <br>
+                <br>
                 <b>category:</b> String, the name of target Category <br>
                 <br>
                 <b>Example Code (See Examples page for actual performance)</b>: <br>
