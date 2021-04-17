@@ -230,10 +230,13 @@
                 newRanking.appendChild(rankingText);
                 newRow.appendChild(newRanking);
                 const newIcon = document.createElement('td');
+                const imageContainer = document.createElement('a');
                 const defaultImage = document.createElement('img');
                 defaultImage.src =  "user.png";
+                defaultImage.alt = "A User Icon";
                 defaultImage.className = "Icon";
-                newIcon.appendChild(defaultImage);
+                imageContainer.appendChild(defaultImage);
+                newIcon.appendChild(imageContainer);
                 newRow.appendChild(newIcon);
                 for (var col = 0; col < this.numCategory; col++) {
                     const newElement = document.createElement('td');
@@ -425,7 +428,17 @@
             var target = document.getElementById(this.tableId + "-" + id);
 
             if (target){
-                target.childNodes[1].lastChild.src = newSrc;
+                target.childNodes[1].lastChild.lastChild.src = newSrc;
+            }
+        },
+
+        // Set link on User Icon
+        setLinkOnIcon: function(id, link){
+
+            var target = document.getElementById(this.tableId + "-" + id);
+
+            if (target){
+                target.childNodes[1].lastChild.href = link;
             }
         }
         

@@ -104,6 +104,12 @@ function examples() {
     example8.insertRows(exampleNewData);
     example8.changeUserIcon(2, "test.jpg");
 
+    const example9 = new EasyLeaderboard();
+    example9.createLeaderboard("Example9", "Example9", "SampleLeaderboard", ["Name", "Score"], exampleData);
+    example9.insertRows(exampleNewData);
+    example9.changeUserIcon(2, "test.jpg");
+    example9.setLinkOnIcon(2, "https://easyleaderboard.herokuapp.com/documentation.html");
+
 }
 
 examples();
