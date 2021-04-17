@@ -186,3 +186,57 @@ code {
 .JSObject td {
   padding: 10px;
 }
+
+.Rank1 td {
+  font-size: 110%;
+  padding: 3%;
+  animation: goldletter 5s infinite linear;
+}
+
+@keyframes goldletter {
+  0% {
+    color: black;
+  }
+  50% {
+    color: gold;
+  }
+  100% {
+    color: black;
+  }
+}
+
+.Rank2 td {
+  font-size: 110%;
+  padding: 3%;
+  animation: silverletter 5s infinite linear;
+}
+
+@keyframes silverletter {
+  0% {
+    color: black;
+  }
+  50% {
+    color: silver;
+  }
+  100% {
+    color: black;
+  }
+}
+
+.Rank3 td {
+  font-size: 110%;
+  padding: 3%;
+  animation: bronzeletter 5s infinite linear;
+}
+
+@keyframes bronzeletter {
+  0% {
+    color: black;
+  }
+  50% {
+    color: brown;
+  }
+  100% {
+    color: black;
+  }
+}

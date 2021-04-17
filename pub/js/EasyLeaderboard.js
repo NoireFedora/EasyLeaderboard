@@ -88,6 +88,20 @@
         var count = 1;
         for (var i = 0; i < rows.length; i++){
             if (window.getComputedStyle(rows[i]).visibility === "visible"){
+                if (count == 1){
+                    rows[i].className = "Rank1";
+                }
+                else if (count == 2){
+                    rows[i].className = "Rank2";
+                }
+                else if (count == 3){
+                    rows[i].className = "Rank3";
+                }
+                else {
+                    rows[i].classList.remove("Rank1");
+                    rows[i].classList.remove("Rank2");
+                    rows[i].classList.remove("Rank3");
+                }
                 rows[i].getElementsByTagName("TD")[0].innerText = count;
                 count++;
             }
@@ -222,6 +236,15 @@
             this.tableId = this.uid + "-Data";
             for (var row = 0; row < this.data.length; row++) {
                 const newRow = document.createElement('tr');
+                if (row == 0){
+                    newRow.className = "Rank1";
+                }
+                else if (row == 1){
+                    newRow.className = "Rank2";
+                }
+                else if (row == 2){
+                    newRow.className = "Rank3";
+                }
                 newRow.setAttribute("id", this.uid + "-Data-" + this.data[row]["id"]);
                 const newRanking = document.createElement('td');
                 const rankingText = document.createTextNode(row + 1);
