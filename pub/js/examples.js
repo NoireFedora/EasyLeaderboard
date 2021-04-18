@@ -110,6 +110,34 @@ function examples() {
     example9.changeUserIcon(2, "test.jpg");
     example9.setLinkOnIcon(2, "https://easyleaderboard.herokuapp.com/documentation.html");
 
+    const example10 = new EasyLeaderboard();
+    example10.createLeaderboard("Example10", "Example10", "SampleLeaderboard", ["Name", "Score"], exampleData);
+    example10.insertRows(exampleNewData);
+    example10.changeUserIcon(2, "test.jpg");
+    example10.setLinkOnIcon(2, "https://easyleaderboard.herokuapp.com/documentation.html");
+    example10.changeColorLeaderboard("green");
+    const colorLeaderboard = document.querySelector("#ColorLeaderboard");
+    colorLeaderboard.addEventListener('submit', setLeaderboardColor);
+    function setLeaderboardColor(e) {
+        e.preventDefault();
+        const color = document.querySelector('#newColorLeaderboard').value;
+        example10.changeColorLeaderboard(color);
+    }
+
+    const example11 = new EasyLeaderboard();
+    example11.createLeaderboard("Example11", "Example11", "SampleLeaderboard", ["Name", "Score"], exampleData);
+    example11.insertRows(exampleNewData);
+    example11.changeUserIcon(2, "test.jpg");
+    example11.setLinkOnIcon(2, "https://easyleaderboard.herokuapp.com/documentation.html");
+    example11.changeColorCategory("blue");
+    const colorCategory = document.querySelector("#ColorCategory");
+    colorCategory.addEventListener('submit', setCategoryColor);
+    function setCategoryColor(e) {
+        e.preventDefault();
+        const color = document.querySelector('#newColorCategory').value;
+        example11.changeColorCategory(color);
+    }
+
 }
 
 examples();

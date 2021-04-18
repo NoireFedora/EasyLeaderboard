@@ -189,6 +189,7 @@
             // - Ranking Table
             const scoreboard = document.createElement('table');
             scoreboard.className = "Scoreboard";
+            scoreboard.setAttribute("id", this.uid + "-Scoreboard");
             // -- Column Group
             const columnGroup = document.createElement('colgroup');
             columnGroup.setAttribute("id", this.uid + "-ColumnGroup");
@@ -460,8 +461,41 @@
             if (target){
                 target.childNodes[1].lastChild.href = link;
             }
+        },
+
+        // Change background colour of Leaderboard
+        changeColorLeaderboard: function(color){
+            var target = document.getElementById(this.uid);
+            if (target){
+                target.style.background = color;
+            }
+        },
+
+        // Change background colour of Category Button
+        changeColorCategory: function(color){
+            var target = document.getElementById(this.uid + "-CategoryButton");
+            if (target){
+                target.style.background = color;
+            }
+        },
+
+        // Change background colour of Category Button
+        changeColorTableHead: function(color){
+            var target = document.getElementById(this.uid + "-Attributes");
+            if (target){
+                target.style.background = color;
+            }
+        },
+
+        // Change background colour of Category Button
+        changeColorTableBody: function(color){
+            var target = document.getElementById(this.uid + "-Scoreboard");
+            if (target){
+                target.style.background= color;
+            }
         }
-        
+
+
     }
 
     global.EasyLeaderboard = global.EasyLeaderboard || EasyLeaderboard;

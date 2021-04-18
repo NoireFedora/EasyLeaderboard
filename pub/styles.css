@@ -143,7 +143,7 @@ td {
 
 .Scoreboard {
   width: 100%;
-  background-color: #f1f1c1;
+  background: #f1f1c1;
   text-align: center;
   border-spacing: 5px;
   box-sizing: content-box;
