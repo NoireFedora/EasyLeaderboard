@@ -140,6 +140,7 @@
             
             // - Title
             const titleContainer = document.createElement("h2");
+            titleContainer.className = "LeaderboardTitle";
             titleContainer.setAttribute("id", this.uid + "-Title");
             const titleText = document.createTextNode(title);
             titleContainer.appendChild(titleText);

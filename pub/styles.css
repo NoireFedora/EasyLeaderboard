@@ -1,10 +1,15 @@
 body {
   background-color: #bbdab5;
   margin: 0%;
+  padding: 0%;
 }
 
 table {
   border-collapse: collapse;
+}
+
+table tr:hover td {
+  background-color: #ddd;
 }
 
 th {
@@ -12,7 +17,7 @@ th {
 }
 
 td {
-  font-size: 110%;
+  font-size: 120%;
   padding: 3%;
 }
 
@@ -73,11 +78,13 @@ td {
 
 .Leaderboard {
   text-align: center;
-  background-color: #bbbbbb;
+  background-color: #dab85b;
   width: 30%;
   padding: 0.5%;
   border: 2px solid black;
   margin-top: 1%;
+  border-radius: 20px;
+  display: inline-block;
 }
 
 .CategoryGroup {
@@ -100,7 +107,7 @@ td {
 }
 
 .CategoryButton {
-  background-color: #448fbb;
+  background-color: #2dc24d;
   color: white;
   padding: 16px;
   font-size: 100%;
@@ -140,6 +147,7 @@ td {
   text-align: center;
   border-spacing: 5px;
   box-sizing: content-box;
+  border-radius: 20px;
 }
 
 .RankingCol {
@@ -239,4 +247,30 @@ code {
   100% {
     color: black;
   }
+}
+
+.Attributes {
+  background-color: #f3e521;
+}
+
+.Attributes th:first-child {
+  padding: 2%;
+  border-radius: 20px 0 0 0;
+}
+
+.Attributes th:last-child {
+  padding: 2%;
+  border-radius: 0 20px 0 0;
+}
+
+.LeaderboardTitle {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 200%;
+}
+
+.Sample {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
 }
