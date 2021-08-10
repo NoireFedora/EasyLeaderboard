@@ -2,6 +2,9 @@
 
 Link: https://easyleaderboard.herokuapp.com/index.html
 
+## Note
+This Javascript library is fully developed by myself to fullfill the requirement of CSC309 Individual Project that to build own Javascript library
+
 ## Getting Started
 
 At first, you need to include this library and its style sheet in the <strong>Head</strong> part of your html file. <br>
