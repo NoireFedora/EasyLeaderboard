@@ -3,7 +3,7 @@
 Link: https://easyleaderboard.herokuapp.com/index.html
 
 ## Note
-This Javascript library is fully developed by myself to fullfill the requirement of CSC309 Individual Project that to build own Javascript library
+This Javascript library is fully developed by myself to fullfill the requirement of CSC309 Individual Project that to build my own Javascript library
 
 ## Getting Started
 
